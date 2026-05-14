@@ -5,35 +5,32 @@ import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
   const router = useRouter();
-  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
+    const data = localStorage.getItem("user");
 
-    if (!user) {
+    if (!data) {
       router.push("/login");
     } else {
-      setLoading(false);
+      setUser(JSON.parse(data));
     }
   }, []);
 
-  if (loading) {
-    return (
-      <div style={{ color: "white", textAlign: "center", marginTop: "50px" }}>
-        جاري التحميل...
-      </div>
-    );
-  }
+  const logout = () => {
+    localStorage.removeItem("user");
+    router.push("/login");
+  };
+
+  if (!user) return null;
 
   return (
     <div className="layout">
       <aside className="sidebar">
         <h2>🚀 NexPath</h2>
+        <p>{user.email}</p>
 
-        <nav>
-          <a href="/dashboard">🏠 الرئيسية</a>
-          <a href="/login">🚪 تسجيل خروج</a>
-        </nav>
+        <button onClick={logout}>تسجيل خروج</button>
       </aside>
 
       <main className="main">
@@ -41,8 +38,8 @@ export default function Dashboard() {
 
         <div className="cards">
           <div className="card">👤 المستخدم: نشط</div>
-          <div className="card">⚡ الحالة: يعمل</div>
-          <div className="card">🚀 المنصة: جاهزة</div>
+          <div className="card">⚡ الحالة: ممتاز</div>
+          <div className="card">🚀 النظام: يعمل</div>
         </div>
       </main>
 
@@ -50,9 +47,8 @@ export default function Dashboard() {
         .layout {
           display: flex;
           min-height: 100vh;
-          font-family: Arial;
-          background: #0f172a;
           color: white;
+          font-family: Arial;
         }
 
         .sidebar {
@@ -61,24 +57,19 @@ export default function Dashboard() {
           padding: 20px;
         }
 
-        nav {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-        }
-
-        a {
-          color: #cbd5e1;
-          text-decoration: none;
-        }
-
-        a:hover {
+        button {
+          margin-top: 20px;
+          padding: 10px;
+          background: red;
+          border: none;
           color: white;
+          cursor: pointer;
         }
 
         .main {
           flex: 1;
           padding: 30px;
+          background: #0f172a;
         }
 
         .cards {
