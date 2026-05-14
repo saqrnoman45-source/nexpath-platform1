@@ -1,38 +1,48 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 
 export default function Dashboard() {
   const router = useRouter();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const user = localStorage.getItem("user");
-    if (!user) router.push("/login");
+
+    if (!user) {
+      router.push("/login");
+    } else {
+      setLoading(false);
+    }
   }, []);
+
+  if (loading) {
+    return (
+      <div style={{ color: "white", textAlign: "center", marginTop: "50px" }}>
+        جاري التحميل...
+      </div>
+    );
+  }
 
   return (
     <div className="layout">
-      {/* Sidebar */}
       <aside className="sidebar">
         <h2>🚀 NexPath</h2>
 
         <nav>
-          <Link href="/dashboard">🏠 الرئيسية</Link>
-          <Link href="/dashboard">📊 الإحصائيات</Link>
-          <Link href="/login">🚪 تسجيل خروج</Link>
+          <a href="/dashboard">🏠 الرئيسية</a>
+          <a href="/login">🚪 تسجيل خروج</a>
         </nav>
       </aside>
 
-      {/* Main */}
       <main className="main">
         <h1>لوحة التحكم 📊</h1>
 
         <div className="cards">
-          <div className="card">👤 المستخدمين: 1</div>
-          <div className="card">⚡ الأداء: ممتاز</div>
-          <div className="card">📦 المشاريع: 1</div>
+          <div className="card">👤 المستخدم: نشط</div>
+          <div className="card">⚡ الحالة: يعمل</div>
+          <div className="card">🚀 المنصة: جاهزة</div>
         </div>
       </main>
 
@@ -49,9 +59,6 @@ export default function Dashboard() {
           width: 220px;
           background: #111827;
           padding: 20px;
-          display: flex;
-          flex-direction: column;
-          gap: 20px;
         }
 
         nav {
@@ -60,15 +67,13 @@ export default function Dashboard() {
           gap: 10px;
         }
 
-        nav a {
+        a {
           color: #cbd5e1;
           text-decoration: none;
-          padding: 8px;
-          border-radius: 8px;
         }
 
-        nav a:hover {
-          background: #1e293b;
+        a:hover {
+          color: white;
         }
 
         .main {
