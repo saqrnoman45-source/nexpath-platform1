@@ -2,44 +2,21 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="container">
-      <div className="card">
-        <h1>🚀 NexPath Platform</h1>
-        <p>منصة احترافية قيد التطوير</p>
+    <div className="flex items-center justify-center h-screen flex-col">
+      <h1 className="text-4xl font-bold text-indigo-600">
+        NexPath 🚀
+      </h1>
 
-        <Link href="/login">
-          <button>ابدأ الآن</button>
-        </Link>
-      </div>
+      <p className="mt-3 text-gray-600">
+        منصة تعليم وإدارة حديثة
+      </p>
 
-      <style jsx>{`
-        .container {
-          height: 100vh;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          background: linear-gradient(135deg, #0f172a, #1e293b);
-        }
-
-        .card {
-          background: rgba(255,255,255,0.08);
-          padding: 40px;
-          border-radius: 20px;
-          text-align: center;
-          color: white;
-          width: 320px;
-        }
-
-        button {
-          margin-top: 15px;
-          padding: 10px 20px;
-          border: none;
-          border-radius: 10px;
-          background: #3b82f6;
-          color: white;
-          cursor: pointer;
-        }
-      `}</style>
+      <Link
+        href="/dashboard"
+        className="mt-6 bg-indigo-600 text-white px-6 py-3 rounded-xl"
+      >
+        دخول لوحة التحكم
+      </Link>
     </div>
   );
 }
