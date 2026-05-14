@@ -8,12 +8,17 @@ export default function Login() {
   const [email, setEmail] = useState("");
 
   const login = () => {
-    if (email.trim() !== "") {
-      localStorage.setItem("user", email);
-      router.push("/dashboard"); // 👈 هذا هو السطر المهم
-    } else {
-      alert("اكتب الإيميل أولاً 😄");
+    if (email.trim().length < 3) {
+      alert("اكتب بيانات صحيحة 😄");
+      return;
     }
+
+    localStorage.setItem("user", JSON.stringify({
+      email,
+      time: Date.now()
+    }));
+
+    router.push("/dashboard");
   };
 
   return (
@@ -22,7 +27,7 @@ export default function Login() {
         <h2>تسجيل الدخول</h2>
 
         <input
-          placeholder="البريد الإلكتروني"
+          placeholder="الإيميل"
           onChange={(e) => setEmail(e.target.value)}
         />
 
@@ -36,7 +41,6 @@ export default function Login() {
           justify-content: center;
           align-items: center;
           background: #0f172a;
-          font-family: Arial;
         }
 
         .box {
@@ -54,7 +58,6 @@ export default function Login() {
           padding: 10px;
           border-radius: 8px;
           border: none;
-          outline: none;
         }
 
         button {
