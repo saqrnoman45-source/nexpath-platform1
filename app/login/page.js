@@ -8,9 +8,11 @@ export default function Login() {
   const [email, setEmail] = useState("");
 
   const login = () => {
-    if (email) {
+    if (email.trim() !== "") {
       localStorage.setItem("user", email);
-      router.push("/dashboard");
+      router.push("/dashboard"); // 👈 هذا هو السطر المهم
+    } else {
+      alert("اكتب الإيميل أولاً 😄");
     }
   };
 
