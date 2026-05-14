@@ -1,12 +1,12 @@
 export const metadata = {
   title: "NexPath Platform",
-  description: "A modern platform"
+  description: "Modern Platform"
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="ar" dir="rtl">
-      <body style={{ margin: 0, fontFamily: "Arial" }}>
+      <body style={{ margin: 0, fontFamily: "Arial", background: "#0f172a" }}>
         {children}
       </body>
     </html>
