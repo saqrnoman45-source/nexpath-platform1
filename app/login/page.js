@@ -6,58 +6,64 @@ import { useRouter } from "next/navigation";
 export default function Login() {
   const router = useRouter();
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    if (email && password) {
+  const login = () => {
+    if (email) {
       localStorage.setItem("user", email);
       router.push("/dashboard");
-    } else {
-      alert("اكتب البيانات أولاً 😄");
     }
   };
 
   return (
-    <div style={styles.container}>
-      <h1>تسجيل الدخول</h1>
+    <div className="container">
+      <div className="box">
+        <h2>تسجيل الدخول</h2>
 
-      <input
-        placeholder="الإيميل"
-        onChange={(e) => setEmail(e.target.value)}
-        style={styles.input}
-      />
+        <input
+          placeholder="البريد الإلكتروني"
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-      <input
-        type="password"
-        placeholder="كلمة المرور"
-        onChange={(e) => setPassword(e.target.value)}
-        style={styles.input}
-      />
+        <button onClick={login}>دخول</button>
+      </div>
 
-      <button onClick={handleLogin} style={styles.button}>
-        دخول
-      </button>
+      <style jsx>{`
+        .container {
+          height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: #0f172a;
+          font-family: Arial;
+        }
+
+        .box {
+          background: #1e293b;
+          padding: 30px;
+          border-radius: 16px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          width: 280px;
+          color: white;
+        }
+
+        input {
+          padding: 10px;
+          border-radius: 8px;
+          border: none;
+          outline: none;
+        }
+
+        button {
+          padding: 10px;
+          border: none;
+          border-radius: 8px;
+          background: #22c55e;
+          color: white;
+          cursor: pointer;
+        }
+      `}</style>
     </div>
   );
 }
-
-const styles = {
-  container: {
-    height: "100vh",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: "10px"
-  },
-  input: {
-    padding: "10px",
-    width: "200px"
-  },
-  button: {
-    padding: "10px 20px",
-    background: "blue",
-    color: "white",
-    border: "none"
-  }
-};
