@@ -1,15 +1,15 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
-    <main style={styles.container}>
-      <h1 style={styles.title}>🚀 NexPath Platform</h1>
-      <p style={styles.subtitle}>
-        منصة احترافية قيد التطوير
-      </p>
+    <div style={styles.container}>
+      <h1>🚀 NexPath Platform</h1>
+      <p>منصة احترافية قيد التطوير</p>
 
-      <button style={styles.button}>
-        ابدأ الآن
-      </button>
-    </main>
+      <Link href="/login">
+        <button style={styles.button}>ابدأ الآن</button>
+      </Link>
+    </div>
   );
 }
 
@@ -19,26 +19,13 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "center",
-    background: "linear-gradient(to right, #0f172a, #1e293b)",
-    color: "white",
-    textAlign: "center"
-  },
-  title: {
-    fontSize: "40px",
-    marginBottom: "10px"
-  },
-  subtitle: {
-    fontSize: "18px",
-    color: "#cbd5e1",
-    marginBottom: "20px"
+    alignItems: "center"
   },
   button: {
-    padding: "12px 20px",
-    borderRadius: "10px",
-    border: "none",
-    backgroundColor: "#3b82f6",
+    padding: "10px 20px",
+    background: "green",
     color: "white",
-    cursor: "pointer"
+    border: "none",
+    marginTop: "10px"
   }
 };
